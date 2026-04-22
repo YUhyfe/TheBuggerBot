@@ -1,5 +1,7 @@
 package com.yuhyfe.thebuggerbot;
 
+import com.yuhyfe.thebuggerbot.config.DiscordProperties;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -16,18 +18,15 @@ public class TheBuggerBotApplication {
 
     @Slf4j
     @Component
+    @RequiredArgsConstructor
     static class ConfigCheck implements CommandLineRunner {
 
-        @Value("${discord.token:}")
-        private String token;
-
-        @Value("${discord.guild-id:}")
-        private String guildId;
+        private final DiscordProperties properties;
 
         @Override
         public void run(String... args) {
-            log.info("Token loaded: {}", token.isEmpty() ? "NO ❌" : "YES ✅ (length: " + token.length() + ")");
-            log.info("Guild ID: {}", guildId.isEmpty() ? "NO ❌" : "YES ✅ (" + guildId + ")");
+            log.info("Token loaded: {}", properties.getToken().isEmpty() ? "NO ❌" : "YES ✅");
+            log.info("Guild ID: {}", properties.getGuildId().isEmpty() ? "NO ❌" : "YES ✅ (" + properties.getGuildId() + ")");
         }
     }
 }
