@@ -35,6 +35,12 @@ public class ReadyListener extends ListenerAdapter {
                                 new OptionData(OptionType.STRING, "name", "Project name (kebab-case)")
                                         .setMinLength(3)
                                         .setMaxLength(20)
+                        ),
+                Commands.slash("closeproject", "Close a project archiving its category.")
+                        .addOptions(
+                                new OptionData(OptionType.STRING, "name", "Project name (kebab-case)")
+                                        .setMinLength(3)
+                                        .setMaxLength(20)
                         )
         ).queue(
                 success -> log.info("Registered {} command for guild '{}'", success.size(), guild.getName()),
